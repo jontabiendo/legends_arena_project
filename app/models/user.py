@@ -15,12 +15,12 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     rank = db.Column(db.String(10), nullable=False)
     level = db.Column(db.Integer, nullable=False)
-    wins = db.Column(db.Integer, nullable=False)
-    losses = db.Column(db.Integer, nullable=False)
     team_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("teams.id")))
 
-    completed_missions = db.relationship("Mission", back_populates="completed_users")
-    unlocked_characters = db.relationship("Character", back_populates="unlocked_users")
+    wins = db.relationship("Match", back_populates="player_wins")
+    losses = db.relationship("Match", back_populates="player_losses")
+    # completed_missions = db.relationship("Mission", back_populates="completed_users")
+    # unlocked_characters = db.relationship("Character", back_populates="unlocked_users")
 
     @property
     def password(self):

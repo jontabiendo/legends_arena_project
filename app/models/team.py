@@ -1,6 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 
-class Team(db.Model, UserMixin):
+class Team(db.Model):
     __tablename__ = 'teams'
 
     if environment == "production":
@@ -17,7 +17,7 @@ class Team(db.Model, UserMixin):
     def to_dict(self):
         return {
             "id": self.id,
-            "owner_id": self.owner_id,
+            "owner_id": self.player_id,
             "character": self.character,
             "health": self.health,
             "effects": self.effects

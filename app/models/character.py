@@ -13,9 +13,9 @@ class Character(db.Model):
     about = db.Column(db.String(255), nullable=False)
     classification = db.Column(db.String(20), nullable=False)
 
-    moves = db.relationship("Character_Move", back_populates="character")
-    associations = db.relationship("Character", back_populates="associations")
+    # associations = db.relationship("Character", back_populates="associations")
     team = db.relationship("Team", back_populates="character")
+    moves = db.relationship("Move", back_populates="character")
 
     def to_dict(self):
         return {

@@ -1,6 +1,7 @@
 from flask.cli import AppGroup
 from .users import seed_users, undo_users
-from . characters import seed_characters, undo_characters
+from .characters import seed_characters, undo_characters
+
 
 from app.models.db import db, environment, SCHEMA
 
