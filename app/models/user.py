@@ -13,6 +13,14 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
+    rank = db.Column(db.String(10), nullable=False)
+    level = db.Column(db.Integer, nullable=False)
+    wins = db.Column(db.Integer, nullable=False)
+    losses = db.Column(db.Integer, nullable=False)
+    team_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("teams.id")))
+
+    completed_missions = db.relationship("Mission", back_populates="completed_users")
+    unlocked_characters = db.relationship("Character", back_populates="unlocked_users")
 
     @property
     def password(self):
@@ -29,5 +37,9 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            "rank": self.rank,
+            "level": self.level,
+            "wins": self.wins,
+            "losses": self.losses
         }
